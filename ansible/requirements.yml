@@ -1,0 +1,13 @@
+---
+
+- name: jdauphant.nginx
+  version: v2.18.1
+
+- name: geerlingguy.nodejs
+  version: 4.2.0
+
+- name: geerlingguy.postgresql
+  version: 1.4.3
+
+- src: geerlingguy.certbot
+  version: 3.0.0

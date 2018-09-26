@@ -1,0 +1,25 @@
+---
+nginx_configs:
+  proxy:
+    - proxy_set_header X-Real-IP  $remote_addr
+    - proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for
+    - proxy_set_header Host $host
+    - proxy_connect_timeout 90s
+    - proxy_send_timeout 90s
+    - proxy_read_timeout 90s
+    - proxy_buffer_size 4k
+    - proxy_buffers 4 32k
+    - proxy_busy_buffers_size 64k
+    - proxy_temp_file_write_size 64k
+
+nginx_sites:
+
+  default:
+    - listen 80 
+    - server_name {{ domain_name }}
+    - location / {
+        proxy_pass http://localhost:3001;
+        proxy_redirect off;
+        client_max_body_size 10m;
+        client_body_buffer_size 128k;
+      }

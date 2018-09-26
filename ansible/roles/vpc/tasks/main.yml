@@ -1,0 +1,45 @@
+---
+
+- name: Create AWS VPC
+  ec2_vpc_net:
+    name: "{{ vpc_name }}"
+    cidr_block: "{{ vpc_cidr_block }}"
+    region: "{{ aws_region }}"
+    state: present
+  register: minichat_vpc
+
+- name: Set VPC ID in a variable
+  set_fact:
+    vpc_id: "{{ minichat_vpc.vpc.id }}"
+
+- name: Associate a subnet to VPC
+  ec2_vpc_subnet:
+   state: present
+   vpc_id: "{{ vpc_id }}"
+   cidr: "{{ subnet_cidr }}"
+   az: "{{ aws_region }}c"
+   map_public: yes
+   resource_tags:
+     Name: "{{ subnet_name }}"
+  register: minichat_subnet
+
+- name: Create an Internet Gateway
+  ec2_vpc_igw:
+   vpc_id: "{{ vpc_id }}"
+   region: "{{ aws_region }}"
+   state: "present"
+   tags:
+     Name: "{{ igw_name }}"
+  register: igw
+
+- name: Route IGW
+  ec2_vpc_route_table:
+   vpc_id: "{{ vpc_id }}"
+   region: "{{ aws_region }}"
+   subnets:
+    - "{{ minichat_subnet.subnet.id }}"
+   routes:
+    - dest: 0.0.0.0/0
+      gateway_id: "{{ igw.gateway_id }}"
+   tags:
+    Name: "{{ route_name }}"

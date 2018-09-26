@@ -1,0 +1,10 @@
+---
+#Hostname
+hostname: minichat
+domain_name: minichat.stackbuilders.net
+
+# App directory
+node_apps_location: /var/projects/minichat
+
+# Email Alerts
+uu_email_alerts: nickovivar@gmail.com

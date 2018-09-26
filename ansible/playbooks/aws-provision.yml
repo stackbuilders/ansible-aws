@@ -1,0 +1,10 @@
+---
+
+- hosts: aws
+  connection: local
+  gather_facts: false
+  
+  roles:
+    - role: vpc
+    - role: security-group
+    - role: ec2

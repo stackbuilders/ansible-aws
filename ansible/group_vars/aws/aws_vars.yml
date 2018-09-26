@@ -1,0 +1,27 @@
+---
+
+# VPC
+vpc_name: vpc-minichat
+vpc_cidr_block: 172.32.0.0/16
+aws_region: us-west-1
+
+# Subnet
+subnet_cidr: 172.32.0.0/22
+subnet_name: subnet-minichat
+
+#Internet Gateway
+igw_name: igw-minichat
+
+#Route Table
+route_name: rtb-minichat
+
+#Security Group
+sg_name: sg_minichat
+
+#EC2
+keypair: quitolambda
+instance: t2.micro
+server_name: minichat_server
+image: ami-00b2578f8d3753164
+count: 1
+elastic_ip: 52.9.23.90

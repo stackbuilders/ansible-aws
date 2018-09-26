@@ -1,0 +1,31 @@
+---
+
+- name: Install Forever
+  npm:
+    name: forever
+    global: yes
+    state: present
+
+- name: Creates app directory
+  file:
+    path: "{{ node_apps_location }}"
+    state: directory
+    recurse: yes
+
+- name: Copy app files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ node_apps_location }}"
+  with_items:
+    - "../../../../backend"
+    - "../../../../frontend"
+    - "../../../../Makefile"
+
+- name: Check list of running Node.js apps.
+  command: forever list
+  register: forever_list
+  changed_when: false
+
+- name: Start example Node.js app.
+  command: "make run -C {{ node_apps_location }}"
+  when: "forever_list.stdout.find(node_apps_location + '/src/app.js') == -1"

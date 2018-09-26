@@ -1,0 +1,20 @@
+---
+
+- hosts: application
+  become: true
+
+  roles:
+    - role: initial-setup
+      tags: initial-setup
+    
+    - role: jdauphant.nginx
+      nginx_http_params:
+        - sendfile "on"
+        - access_log "/var/log/nginx/access.log"
+    
+    - role: geerlingguy.nodejs
+      tags: nodejs
+      nodejs_version: "8.x"
+
+    - role: deploy-cloud
+      tags: deploy-cloud

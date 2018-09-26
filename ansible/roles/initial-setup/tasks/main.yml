@@ -1,0 +1,14 @@
+---
+
+- name: Set server hostname
+  include: set-hostname.yml
+
+- name: Set SSH keys
+  include: ssh-keys.yml
+
+- name: Install default applications
+  include: default-apps.yml
+
+- name: Set network configurations
+  include: networking.yml
+

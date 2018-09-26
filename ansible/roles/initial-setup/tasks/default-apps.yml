@@ -1,0 +1,25 @@
+---
+ - name: Install packages
+   apt: name={{ item }} state=present
+   with_items:
+     - git
+     - htop
+     - tree  
+     - net-tools
+     - vim
+     - ufw
+     - make
+     - python
+     - python-dev
+     - gcc
+     - dialog
+     - libaugeas0
+     - augeas-lenses
+     - libssl-dev
+     - libffi-dev
+     - ca-certificates
+     - python-pip
+     - python-virtualenv
+     - git
+     - libpython-dev
+     - zlib1g-dev
