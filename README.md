@@ -1,3 +1,9 @@
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/1821812/46155498-0f487300-c23d-11e8-9a7a-4418c4325ed8.png" width="250">
+</p>
+
+
 # Configure AWS with Ansible
 
 Deploy a basic AWS infrastructure with Ansible
